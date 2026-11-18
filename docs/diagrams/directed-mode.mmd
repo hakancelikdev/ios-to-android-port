@@ -1,0 +1,12 @@
+flowchart LR
+    ASK(["/ios-port the settings screen"]) --> FIND["find it on iOS<br/>file names, ios_cite.sh, on-screen text"]
+    FIND -- "several candidates" --> QUESTION(["asks you one question"])
+    FIND -- "not on iOS" --> NOTPORT(["stops: that is a new feature, not a port"])
+    FIND -- "found" --> BIND{"ledger row?"}
+    BIND -- "todo or blocked" --> DOING["row becomes doing"]
+    BIND -- "done, but it still differs" --> NEWROW["new row: after the old ID"]
+    BIND -- "none" --> SECTION["new section: Owner request + date"]
+    DOING --> SAME["Read iOS, build, gate, review, commit"]
+    NEWROW --> SAME
+    SECTION --> SAME
+    SAME --> REPORT(["reports what was done and the open slices, then stops"])

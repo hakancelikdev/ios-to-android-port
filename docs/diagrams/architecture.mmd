@@ -1,0 +1,30 @@
+flowchart LR
+    subgraph IOS["iOS repo — the spec, read-only"]
+        SWIFT["Swift / SwiftUI source"]
+        HISTORY["git history on main"]
+        STRINGS["Localizable.strings"]
+    end
+
+    subgraph TOOLS["tools/port scripts"]
+        CITE["ios_cite.sh<br/>exact citation, role, every modifier"]
+        SYNC["ios_sync_scan.sh<br/>iOS commits since the last sync"]
+        IMPORT["ios_strings_import.py<br/>iOS strings → Android resources"]
+    end
+
+    subgraph ANDROID["Android repo — everything the loop writes"]
+        LEDGER[("docs/port/parity-ledger.md<br/>one row per feature")]
+        SKILL["ios-port skill<br/>follows ios-parity.md"]
+        CODE["Kotlin / Compose code"]
+        REVIEWER["parity-reviewer agent<br/>fresh context"]
+    end
+
+    REMOTE["git remote"]
+
+    SWIFT --> CITE --> SKILL
+    HISTORY --> SYNC -- "new todo rows" --> LEDGER
+    STRINGS --> IMPORT --> CODE
+    SKILL <-->|"reads the next task via parity_check.sh<br/>updates the row: doing, done, blocked"| LEDGER
+    SKILL -- "writes" --> CODE
+    CODE -- "staged diff" --> REVIEWER
+    REVIEWER -- "must-fix or approve" --> SKILL
+    CODE -- "green gate → commit + push" --> REMOTE
