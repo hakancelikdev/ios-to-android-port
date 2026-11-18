@@ -1,0 +1,14 @@
+{
+  "_schema": "route → iOS tap-path + expected accessibility element list. Filled by the ios-visual-parity bootstrap (ios_ref_capture.sh).",
+  "_note_ios": "iOS tapPath items are either a bare accessibility label (e.g. \"Settings\") — ios_ref_capture.sh tap-label finds it in describe-all and taps its centre — or a raw \"x,y\" point coordinate (for the tap command). The prefixed id:/text:/desc: form belongs to the Android ledger only.",
+  "routes": [
+    {
+      "id": "VP-01",
+      "route": "Home",
+      "screenshot": "home.png",
+      "tapPath": [],
+      "captured": null,
+      "elements": []
+    }
+  ]
+}

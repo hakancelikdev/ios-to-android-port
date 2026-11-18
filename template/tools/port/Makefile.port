@@ -1,0 +1,34 @@
+# Optional make shortcuts for the port loop. In your Makefile:  include tools/port/Makefile.port
+# The skills call the scripts directly; these targets are for humans.
+
+.PHONY: parity visual-parity ios-ref ios-cite ios-sync ios-strings ios-stale-strings port-format port-gate port-app
+
+parity: ## iOS→Android parity state (docs/port/parity-ledger.md)
+	@bash tools/port/parity_check.sh
+
+visual-parity: ## Visual parity state (docs/port/visual-parity-ledger.md)
+	@bash tools/port/visual_parity_check.sh
+
+ios-ref: ## Verify the iOS reference branch, warn if behind origin
+	@bash tools/port/ios_ref.sh
+
+ios-cite: ## Generate an iOS citation: make ios-cite S=SettingsRow
+	@bash tools/port/ios_cite.sh $(S)
+
+ios-sync: ## New user-facing iOS commits since the last sync
+	@bash tools/port/ios_sync_scan.sh
+
+ios-strings: ## Regenerate Android strings from the iOS .strings
+	@python3 tools/port/ios_strings_import.py
+
+ios-stale-strings: ## Android strings still holding an old iOS text
+	@python3 tools/port/ios_stale_strings.py
+
+port-format: ## FORMAT_CMD from port.env
+	@bash tools/port/run.sh format
+
+port-gate: ## GATE_CMD from port.env + ledger checks
+	@bash tools/port/run.sh gate
+
+port-app: ## Install and launch the app once
+	@bash tools/port/run.sh app
