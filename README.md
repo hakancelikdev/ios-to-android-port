@@ -4,10 +4,12 @@
 
 It is the exact system used to build the Android versions of two shipping apps:
 
-| App | Ledger rows | Parity |
-|---|---|---|
-| **Vakit** — prayer times (App Store → Google Play) | 3,231 | 100 % code parity, visual parity loop running |
-| **Meld** — tile-merge puzzle | 109 | 98 % (remaining rows owner-gated: store accounts) |
+| App | iOS (the spec) | Android (the port) | Ledger rows | Parity |
+|---|---|---|---|---|
+| **Vakit** — prayer times | [App Store](https://apps.apple.com/app/id6748356813) | [Google Play](https://play.google.com/store/apps/details?id=com.hakancelikdev.vakit) | 3,231 | 100 % code parity, visual parity loop running |
+| **Meld** — tile-merge puzzle | [App Store](https://apps.apple.com/app/id6762136232) | Google Play closed testing (public listing pending Play review) | 109 | 98 % (remaining rows owner-gated: store accounts) |
+
+Install both versions side by side to judge the result yourself.
 
 Porting Vakit's system to Meld changed only paths — the ledger checker is byte-for-byte identical. This repo is that system with the paths moved into one config file.
 
